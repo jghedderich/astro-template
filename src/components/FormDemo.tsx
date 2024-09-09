@@ -1,7 +1,8 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 import {
   Form,
   FormControl,
@@ -11,8 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 
 const formSchema = z.object({
   username: z
@@ -39,10 +38,13 @@ export const FormDemo = () => {
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log(data);
   };
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="border rounded-lg max-w-lg mt-10  p-4 space-y-4"
+      >
+        <h1 className="text-2xl font-bold">Create an account</h1>
         <FormField
           control={form.control}
           name="username"
@@ -50,7 +52,7 @@ export const FormDemo = () => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input placeholder="JohnDoe" {...field} />
               </FormControl>
               <FormDescription>
                 This is your public display name.
@@ -59,6 +61,7 @@ export const FormDemo = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="email"
@@ -66,12 +69,17 @@ export const FormDemo = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@gmail.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="johndoe@example.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
@@ -85,7 +93,16 @@ export const FormDemo = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit form</Button>
+        <Button
+          onClick={form.handleSubmit(onSubmit)}
+          type="submit"
+          className="w-full"
+        >
+          Submit
+        </Button>
+        <p className="text-gray-500 text-center text-xs">
+          Made with Shadcn, RHF and Zod
+        </p>
       </form>
     </Form>
   );
