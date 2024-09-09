@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import '@/styles/globals.css'
+import { FormDemo } from '@/components/FormDemo';
 
 ---
 
@@ -16,9 +17,8 @@ import '@/styles/globals.css'
       <li>Shadcn Ui</li>
       <li>Vitest</li>
     </ul>
-    <Button>Create account</Button>
-    <Input type='text' placeholder="Type here" className='mt-3' />
 
+    <FormDemo client:load/>
   </main>
 </Layout>
 
