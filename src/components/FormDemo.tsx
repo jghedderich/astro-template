@@ -12,6 +12,8 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form';
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from './ui/toast';
 
 const formSchema = z.object({
   username: z
@@ -26,6 +28,7 @@ const formSchema = z.object({
 });
 
 export const FormDemo = () => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,6 +40,11 @@ export const FormDemo = () => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log(data);
+    toast({
+      title: 'Form submitted',
+      description: 'Look at this cool toast!',
+      action: <ToastAction altText="Close toast">Nice</ToastAction>,
+    });
   };
   return (
     <Form {...form}>
